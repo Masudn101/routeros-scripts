@@ -1,4 +1,8 @@
 # backup_config_AP_MikroTik
+![Snap 2024-10-29 at 10 14 50 PM](https://github.com/user-attachments/assets/18e5afe7-d0bd-4c77-baa5-524b0bedc765)
+
+
+
 # To export
 ```
 /export file=backup_config.rsc
