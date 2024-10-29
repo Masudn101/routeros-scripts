@@ -11,7 +11,7 @@
 ```
 /export file=backup_config.rsc
 ```
-
+https://youtu.be/AtrcnSHCtkE?si=uZRTHKZv9e_z6ErZ
 ```
 # oct/29/2024 21:23:45 by RouterOS 6.48.4
 # software id = BN0C-WY9F
