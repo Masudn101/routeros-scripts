@@ -5,9 +5,13 @@ https://github.com/user-attachments/assets/cca4e765-0f2d-48a4-801a-5c27320f7702
 ```
 /export file=backup_config.rsc
 ```
+# To export single config from  board
+```
+/ppp secret export file=ppp-secrets.txt
+```
 # To import
 ```
-/export file=backup_config.rsc
+/import file=backup_config.rsc
 ```
 https://youtu.be/AtrcnSHCtkE?si=uZRTHKZv9e_z6ErZ
 ```
