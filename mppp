@@ -1,0 +1,95 @@
+# dec/23/2024 15:35:08 by RouterOS 6.48.6
+# software id = 0XYZ-CFZR
+#
+#
+#
+/interface bridge
+add name=bridge-WAN1
+add name=bridge-WAN2
+add name=bridge-WAN3
+add name=bridge1
+/interface ethernet
+set [ find default-name=ether1 ] name="ether1-WAN "
+set [ find default-name=ether2 ] name=ether2-L1
+set [ find default-name=ether3 ] name=ether3-L2
+set [ find default-name=ether5 ] name=ether5-Local
+/interface pppoe-client
+add add-default-route=yes disabled=no interface=bridge-WAN1 name=pppoe-out1 \
+    password=1 user=1
+add add-default-route=yes disabled=no interface=bridge-WAN2 name=pppoe-out2 \
+    password=2 user=2
+add add-default-route=yes disabled=no interface=bridge-WAN3 name=pppoe-out3 \
+    password=3 user=3
+/interface vlan
+add interface=ether2-L1 name=vlan1-L1 vlan-id=1
+add interface=ether3-L2 name=vlan1-L2 vlan-id=1
+add interface=ether2-L1 name=vlan2-L1 vlan-id=2
+add interface=ether3-L2 name=vlan2-L2 vlan-id=2
+add interface=ether2-L1 name=vlan3-L1 vlan-id=3
+add interface=ether3-L2 name=vlan3-L2 vlan-id=3
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/lora servers
+add address=eu.mikrotik.thethings.industries down-port=1700 name=TTN-EU \
+    up-port=1700
+add address=us.mikrotik.thethings.industries down-port=1700 name=TTN-US \
+    up-port=1700
+add address=eu1.cloud.thethings.industries down-port=1700 name=\
+    "TTS Cloud (eu1)" up-port=1700
+add address=nam1.cloud.thethings.industries down-port=1700 name=\
+    "TTS Cloud (nam1)" up-port=1700
+add address=au1.cloud.thethings.industries down-port=1700 name=\
+    "TTS Cloud (au1)" up-port=1700
+add address=eu1.cloud.thethings.network down-port=1700 name="TTN V3 (eu1)" \
+    up-port=1700
+add address=nam1.cloud.thethings.network down-port=1700 name="TTN V3 (nam1)" \
+    up-port=1700
+add address=au1.cloud.thethings.network down-port=1700 name="TTN V3 (au1)" \
+    up-port=1700
+/tool user-manager customer
+set admin access=\
+    own-routers,own-users,own-profiles,own-limits,config-payment-gw
+/interface bridge port
+add bridge=bridge1 interface="ether1-WAN " multicast-router=disabled
+add bridge=bridge1 interface=vlan1-L1 multicast-router=disabled
+add bridge=bridge1 interface=vlan2-L1 multicast-router=disabled
+add bridge=bridge1 interface=vlan3-L1 multicast-router=disabled
+add bridge=bridge-WAN1 interface=vlan1-L2 multicast-router=disabled
+add bridge=bridge-WAN2 interface=vlan2-L2 multicast-router=disabled
+add bridge=bridge-WAN3 interface=vlan3-L2 multicast-router=disabled
+/ip address
+add address=1.0.1.1/24 interface=ether5-Local network=1.0.1.0
+/ip cloud
+set update-time=no
+/system identity
+set name=RouterOS
+/system lcd
+set contrast=0 enabled=no port=parallel type=24x4
+/system lcd page
+set time disabled=yes display-time=5s
+set resources disabled=yes display-time=5s
+set uptime disabled=yes display-time=5s
+set packets disabled=yes display-time=5s
+set bits disabled=yes display-time=5s
+set version disabled=yes display-time=5s
+set identity disabled=yes display-time=5s
+set vlan3-L2 disabled=yes display-time=5s
+set vlan3-L1 disabled=yes display-time=5s
+set vlan2-L2 disabled=yes display-time=5s
+set vlan2-L1 disabled=yes display-time=5s
+set "ether1-WAN " disabled=yes display-time=5s
+set ether2-L1 disabled=yes display-time=5s
+set ether3-L2 disabled=yes display-time=5s
+set ether4 disabled=yes display-time=5s
+set ether5-Local disabled=yes display-time=5s
+set vlan1-L2 disabled=yes display-time=5s
+set vlan1-L1 disabled=yes display-time=5s
+set bridge1 disabled=yes display-time=5s
+set bridge-WAN1 disabled=yes display-time=5s
+set bridge-WAN2 disabled=yes display-time=5s
+set bridge-WAN3 disabled=yes display-time=5s
+set pppoe-out1 disabled=yes display-time=5s
+set pppoe-out2 disabled=yes display-time=5s
+set pppoe-out3 disabled=yes display-time=5s
+/tool user-manager database
+set db-path=user-manager
